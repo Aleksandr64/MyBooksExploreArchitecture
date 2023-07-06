@@ -16,7 +16,7 @@ namespace MyBooks.Web.Controllers
         }
 
         [HttpGet("GetAllBooks")]
-        public IActionResult GetAllBooks() 
+        public IActionResult GetAllBooks()
         {
             var allbooks = _booksService.GetAllBooks();
             return Ok(allbooks);
@@ -29,9 +29,23 @@ namespace MyBooks.Web.Controllers
         }
 
         [HttpPost("AddNewBook")]
-        public IActionResult AddBook([FromBody]BookVM book)
+        public IActionResult AddBook([FromBody] BookVM book)
         {
             _booksService.AddBook(book);
+            return Ok();
+        }
+
+        [HttpPut("update-book-by-id")]
+        public IActionResult UpdateBookId(int id, [FromBody] BookVM book)
+        {
+            var updatedBook = _booksService.UpdateBookById(id, book);
+            return Ok(updatedBook);
+        }
+
+        [HttpDelete("DeleteBook")]
+        public IActionResult DeleteBookById(int bookId) 
+        {
+            _booksService.DeleteBook(bookId);
             return Ok();
         }
     }
