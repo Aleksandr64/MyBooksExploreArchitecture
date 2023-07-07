@@ -14,7 +14,7 @@ namespace MyBooks.Web.Controllers
             _publisherServices = publisherServices;
         }
 
-        [HttpPost("AddPublisher")]
+        [HttpPost("add-publisher")]
         public IActionResult AddNewPublisher([FromBody] PublisherVm publisher)
         {
             _publisherServices.AddPublisher(publisher);
