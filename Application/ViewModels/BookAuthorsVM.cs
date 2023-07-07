@@ -9,6 +9,6 @@ namespace Application.ViewModels
     public class BookAuthorsVM
     {
         public string BookName { get; set; }
-        public List<string> BookAuthors { get; set;}
+        public IEnumerable<string> BookAuthors { get; set;}
     }
 }
