@@ -21,7 +21,7 @@ namespace MyBooks.Web.Controllers
             var allbooks = _booksService.GetAllBooks();
             return Ok(allbooks);
         }
-        [HttpGet("GetIdBook")]
+        [HttpGet("GetIdBooks")]
         public IActionResult GetIdBooks(int bookid)
         {
             var book = _booksService.GetBookById(bookid);
@@ -35,7 +35,7 @@ namespace MyBooks.Web.Controllers
             return Ok();
         }
 
-        [HttpPut("UpdateBook")]
+        [HttpPut("UpdateBool")]
         public IActionResult UpdateBookId(int id, [FromBody] BookVM book)
         {
             var updatedBook = _booksService.UpdateBookById(id, book);
