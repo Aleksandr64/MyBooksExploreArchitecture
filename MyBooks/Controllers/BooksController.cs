@@ -15,13 +15,13 @@ namespace MyBooks.Web.Controllers
             _booksService = booksService;
         }
 
-        [HttpGet("GetAllBooks")]
+        [HttpGet("get-book-all")]
         public IActionResult GetAllBooks()
         {
             var allbooks = _booksService.GetAllBooks();
             return Ok(allbooks);
         }
-        [HttpGet("GetIDBooks")]
+        [HttpGet("get-book-by-id")]
         public IActionResult GetIdBooks(int bookid)
         {
             var book = _booksService.GetBookById(bookid);
@@ -42,7 +42,7 @@ namespace MyBooks.Web.Controllers
             return Ok(updatedBook);
         }
 
-        [HttpDelete("DeleteBook")]
+        [HttpDelete("delete-book-by-id")]
         public IActionResult DeleteBookById(int bookId) 
         {
             _booksService.DeleteBook(bookId);
