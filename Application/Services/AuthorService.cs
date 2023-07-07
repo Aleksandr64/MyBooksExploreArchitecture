@@ -28,29 +28,15 @@ namespace Application.Services
             _context.SaveChanges();
         }
 
-        public List<Author> GetAll() => _context.Authors.ToList();
-
-        public Author GetAuthorById(int AuthorId) => _context.Authors.FirstOrDefault(o => o.Id == AuthorId);
-        
-        public void ApdateAuthorById(int AuthorId, AuthorVm author)
+        public AuthorWithBooksVM GetAuthorWithBooks(int authorId)
         {
-            var _author = _context.Authors.FirstOrDefault(o => o.Id == AuthorId);
-            if(author != null)
+            var _author = _context.Authors.Where(n => n.Id == authorId).Select(author => new AuthorWithBooksVM()
             {
-                _author.FullName = author.FullName;
-            }
-            _context.SaveChanges();
-        }
-        
-        public void DeleteAuthor(int AuthorId)
-        {
-            var author = _context.Authors.FirstOrDefault(a => a.Id == AuthorId);
-            if(author != null)
-            {
-                _context.Authors.Remove(author);
-                _context.SaveChanges();
-            }
-        }
+                FullName = author.FullName,
+                BookTitles = author.Book_Authors.Select(n => n.Book.Title).ToList()
+            }).FirstOrDefault();
 
+            return _author;
+        }
     }
 }
