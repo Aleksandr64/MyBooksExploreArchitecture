@@ -15,14 +15,14 @@ namespace MyBooks.Web.Controllers
             _authorService = authorService;
         }
 
-        [HttpPost("add-author")]
+        [HttpPost("AddNewAuthor")]
         public IActionResult AddAuthor([FromBody] AuthorVm author)
         {
             _authorService.AddAuthor(author);
             return Ok();
         }
 
-        [HttpGet("get-authors-with-books-by-id")]
+        [HttpGet("GetBooksByTheAuthor")]
         public IActionResult GetAuthorWithBooks(int id)
         {
             var responce = _authorService.GetAuthorWithBooks(id);
