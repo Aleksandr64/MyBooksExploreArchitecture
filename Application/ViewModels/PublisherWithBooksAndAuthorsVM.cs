@@ -9,7 +9,7 @@ namespace Application.ViewModels
     public class PublisherWithBooksAndAuthorsVM
     {
         public string Name { get; set; }
-        public List<BookAuthorsVM> BookAuthors { get; set; }
+        public IEnumerable<BookAuthorsVM> BookAuthors { get; set; }
     }
 
     
