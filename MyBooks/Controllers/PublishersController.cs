@@ -3,6 +3,7 @@ using Application.Services;
 using Application.ViewModels;
 using Infrastructure.Context;
 using Microsoft.AspNetCore.Mvc;
+using MyBooks.Web.ActionResults;
 
 namespace MyBooks.Web.Controllers
 {
@@ -35,14 +36,27 @@ namespace MyBooks.Web.Controllers
         }
 
         [HttpGet("GetPublisherById")]
-        public IActionResult GetPublisherById(int id)
+        public CustomActionResult GetPublisherById(int id)
         {
             var _responce = _publisherServices.GetPublisherById(id);
             if(_responce != null)
             {
-                return Ok(_responce);
+                var _responceObj = new CustomActionResultVM()
+                {
+                    Publisher = _responce,
+                };
+
+                return new CustomActionResult(_responceObj);
             }
-            return NotFound();
+            else
+            {
+                var _responceObj = new CustomActionResultVM()
+                {
+                    Exception = new Exception("This is comming from publishers controller")
+                };
+
+                return new CustomActionResult(_responceObj);
+            }
         }
 
         [HttpGet("GetPublisherData")]
@@ -65,6 +79,5 @@ namespace MyBooks.Web.Controllers
                 return BadRequest(ex.Message); 
             }
         }
-
     }
 }
