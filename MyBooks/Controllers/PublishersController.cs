@@ -7,6 +7,8 @@ using MyBooks.Web.ActionResults;
 
 namespace MyBooks.Web.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class PublishersController : Controller
     {
         private PublishersService _publisherServices;
@@ -32,6 +34,20 @@ namespace MyBooks.Web.Controllers
             {
 
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetAllPublisher")]
+        public IActionResult GetAllPublishers(string sortBy, string searchString, int pageNumber)
+        {
+            try
+            {
+                var _result = _publisherServices.GetAllPublishers(sortBy, searchString, pageNumber);
+                return Ok(_result);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Sorry, we could not load the publishers");
             }
         }
 

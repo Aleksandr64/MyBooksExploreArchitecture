@@ -1,4 +1,5 @@
 ﻿using Application.CustomExceptions;
+using Application.Paging;
 using Application.ViewModels;
 using Domain.Models;
 using Infrastructure.Context;
@@ -33,6 +34,33 @@ namespace Application.Services
             _context.SaveChanges();
 
             return _publisher;
+        }
+
+        public IEnumerable<Publisher> GetAllPublishers(string sortBy, string searchString, int? pageNumber)
+        {
+            var _allPublishers = _context.Publishers.OrderBy(n => n.Name).ToList();
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                switch (sortBy)
+                {
+                    case "name_desc":
+                        _allPublishers = _allPublishers.OrderBy(n => n.Name).ToList();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                _allPublishers = _allPublishers.Where(n => n.Name.Contains(searchString)).ToList();
+            }
+
+            int pageSize = 5;
+            _allPublishers = PaginatedList<Publisher>.Create(_allPublishers.AsQueryable(), pageNumber ?? 1, pageSize);
+
+            return _allPublishers;
         }
 
         public Publisher GetPublisherById(int id) => _context.Publishers.FirstOrDefault(x => x.Id == id);
