@@ -26,6 +26,7 @@ namespace Application.Paging
                 return PageIndex > 1;
             }
         }
+
         public bool HasNextPage
         {
             get
