@@ -1,3 +1,4 @@
+using Application.CustomExceptions;
 using Application.Services;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+//app.ConfigureBuildInExceptionHandler();
+app.ConfigureCustomInExceptionHandler();
 
 app.MapControllers();
 

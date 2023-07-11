@@ -27,7 +27,6 @@ namespace Infrastructure.Context
                         DateRead = DateTime.Now.AddDays(-10),
                         Rate = 4,
                         Genre = "Biography",
-                        Author = "First Author",
                         CoverUrl = "https\\....",
                         DateAdded = DateTime.Now,
                     },
@@ -37,7 +36,6 @@ namespace Infrastructure.Context
                         Description = "2st Book Description",
                         IsRead = false,
                         Genre = "Biography",
-                        Author = "First Author",
                         CoverUrl = "https\\....",
                         DateAdded = DateTime.Now,
                     });

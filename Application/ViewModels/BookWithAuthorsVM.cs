@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.ViewModels
 {
-    public class BookVM
+    public  class BookWithAuthorsVM
     {
         public string Title { get; set; }
         public string Description { get; set; }
@@ -16,8 +16,7 @@ namespace Application.ViewModels
         public string Genre { get; set; }
         public string CoverUrl { get; set; }
 
-        public int PublisherId { get; set; }
-        public List<int> AuthorIds { get; set; }
-
+        public string PublisherName { get; set; }
+        public List<string> AuthorName { get; set; }
     }
 }
