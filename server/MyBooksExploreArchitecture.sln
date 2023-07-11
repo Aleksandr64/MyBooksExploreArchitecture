@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBooks.Web", "MyBooks\MyBooks.Web.csproj", "{0CFD1BF5-1576-4328-B335-8B2F03C1D6A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBooks.Web", "MyBooks\MyBooks.Web.csproj", "{0CFD1BF5-1576-4328-B335-8B2F03C1D6A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{99A043A5-C659-4318-A5A3-BAF660AF270B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{99A043A5-C659-4318-A5A3-BAF660AF270B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{0C10C72D-CBAF-4186-A65C-9C968DAAE986}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{0C10C72D-CBAF-4186-A65C-9C968DAAE986}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{5C9FE490-E1A4-434A-B0E5-02121B57420C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{5C9FE490-E1A4-434A-B0E5-02121B57420C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
