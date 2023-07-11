@@ -3,9 +3,12 @@ using Application.Services;
 using Application.ViewModels;
 using Infrastructure.Context;
 using Microsoft.AspNetCore.Mvc;
+using MyBooks.Web.ActionResults;
 
 namespace MyBooks.Web.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class PublishersController : Controller
     {
         private PublishersService _publisherServices;
@@ -34,15 +37,42 @@ namespace MyBooks.Web.Controllers
             }
         }
 
+        [HttpGet("GetAllPublisher")]
+        public IActionResult GetAllPublishers(string sortBy, string searchString, int pageNumber)
+        {
+            try
+            {
+                var _result = _publisherServices.GetAllPublishers(sortBy, searchString, pageNumber);
+                return Ok(_result);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Sorry, we could not load the publishers");
+            }
+        }
+
         [HttpGet("GetPublisherById")]
-        public IActionResult GetPublisherById(int id)
+        public CustomActionResult GetPublisherById(int id)
         {
             var _responce = _publisherServices.GetPublisherById(id);
             if(_responce != null)
             {
-                return Ok(_responce);
+                var _responceObj = new CustomActionResultVM()
+                {
+                    Publisher = _responce,
+                };
+
+                return new CustomActionResult(_responceObj);
             }
-            return NotFound();
+            else
+            {
+                var _responceObj = new CustomActionResultVM()
+                {
+                    Exception = new Exception("This is comming from publishers controller")
+                };
+
+                return new CustomActionResult(_responceObj);
+            }
         }
 
         [HttpGet("GetPublisherData")]
@@ -65,6 +95,5 @@ namespace MyBooks.Web.Controllers
                 return BadRequest(ex.Message); 
             }
         }
-
     }
 }

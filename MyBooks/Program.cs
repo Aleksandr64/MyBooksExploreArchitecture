@@ -35,8 +35,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.ConfigureBuildInExceptionHandler();
-//app.ConfigureCustomExceptionHandler();
+//app.ConfigureBuildInExceptionHandler();
+app.ConfigureCustomInExceptionHandler();
 
 app.MapControllers();
 
