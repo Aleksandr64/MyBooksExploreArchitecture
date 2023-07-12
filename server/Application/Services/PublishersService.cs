@@ -45,7 +45,7 @@ namespace Application.Services
                 switch (sortBy)
                 {
                     case "name_desc":
-                        _allPublishers = _allPublishers.OrderBy(n => n.Name).ToList();
+                        _allPublishers = _allPublishers.OrderByDescending(n => n.Name).ToList();
                         break;
                     default:
                         break;
