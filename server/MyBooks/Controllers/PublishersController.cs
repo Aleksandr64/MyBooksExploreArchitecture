@@ -52,26 +52,16 @@ namespace MyBooks.Web.Controllers
         }
 
         [HttpGet("GetPublisherById")]
-        public CustomActionResult GetPublisherById(int id)
+        public IActionResult GetPublisherById(int id)
         {
             var _responce = _publisherServices.GetPublisherById(id);
             if(_responce != null)
             {
-                var _responceObj = new CustomActionResultVM()
-                {
-                    Publisher = _responce,
-                };
-
-                return new CustomActionResult(_responceObj);
+                return Ok(_responce);
             }
             else
             {
-                var _responceObj = new CustomActionResultVM()
-                {
-                    Exception = new Exception("This is comming from publishers controller")
-                };
-
-                return new CustomActionResult(_responceObj);
+                return NotFound();
             }
         }
 
