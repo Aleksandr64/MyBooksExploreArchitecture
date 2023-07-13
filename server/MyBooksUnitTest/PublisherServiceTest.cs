@@ -104,6 +104,42 @@ namespace MyBooksUnitTest
             Assert.That(result.Name, Does.StartWith("Without"));
         }
 
+        [Test, Order(9)]
+        public void GetPublisherData_Test()
+        {
+            var result = publishersService.GetPublisherData(1);
+
+            Assert.That(result.Name, Is.EqualTo("Publisher 1"));
+            Assert.That(result.BookAuthors, Is.Not.Empty);
+            Assert.That(result.BookAuthors.Count, Is.GreaterThan(0));
+
+            var firstbookName = result.BookAuthors.OrderBy(n => n.BookName).FirstOrDefault().BookName;
+            Assert.That(firstbookName, Is.EqualTo("Book 1 Title"));
+        }
+
+        [Test, Order(10)]
+        public void DeletePublisherById_PublisherExists_Test()
+        {
+            int publisherId = 6;
+
+            var publisherBefore = publishersService.GetPublisherById(publisherId);
+            Assert.That(publisherBefore, Is.Not.Null);
+            Assert.That(publisherBefore.Name, Is.EqualTo("Publisher 6"));
+
+            publishersService.DeletePublisherById(publisherId);
+
+            var publisherAfter = publishersService.GetPublisherById(publisherId);
+            Assert.That(publisherAfter, Is.Null);
+        }
+
+        [Test, Order(11)]
+        public void DeletePublisherById_PublisherDoesNotExists_Test()
+        {
+            int publisherId = 6;
+
+            Assert.That(() => publishersService.DeletePublisherById(publisherId), Throws.Exception.TypeOf<Exception>().With.Message.EqualTo($"The publisher with id: {publisherId} does not exist"));
+        }
+
         [OneTimeTearDown]
         public void CleanUp()
         {
