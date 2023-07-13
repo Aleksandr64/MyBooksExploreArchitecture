@@ -1,4 +1,6 @@
+using Application.CustomExceptions;
 using Application.Services;
+using Application.ViewModels;
 using Domain.Models;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +28,7 @@ namespace MyBooksUnitTest
         }
 
         [Test, Order(1)]
-        public void GetAllPublishers_WithNoSortBy_WithNoSearchString_WithNoPageNumber()
+        public void GetAllPublishers_WithNoSortBy_WithNoSearchString_WithNoPageNumbere_Test()
         {
             var result = publishersService.GetAllPublishers("", "", null);
 
@@ -34,7 +36,7 @@ namespace MyBooksUnitTest
         }
 
         [Test, Order(2)]
-        public void GetAllPublishers_WithNoSortBy_WithNoSearchString_WithPageNumber()
+        public void GetAllPublishers_WithNoSortBy_WithNoSearchString_WithPageNumbere_Test()
         {
             var result = publishersService.GetAllPublishers("", "", 2);
 
@@ -42,7 +44,7 @@ namespace MyBooksUnitTest
         }
 
         [Test, Order(3)]
-        public void GetAllPublishers_WithSortBy_WithSearchString_WithNoPageNumber()
+        public void GetAllPublishers_WithSortBy_WithSearchString_WithNoPageNumbere_Test()
         {
             var result = publishersService.GetAllPublishers("", "3", null);
 
@@ -51,12 +53,55 @@ namespace MyBooksUnitTest
         }
 
         [Test, Order(4)]
-        public void GetAllPublishers_WithSortBy_WithNoSearchString_WithNoPageNumber()
+        public void GetAllPublishers_WithSortBy_WithNoSearchString_WithNoPageNumbere_Test()
         {
             var result = publishersService.GetAllPublishers("name_desc", "", null);
 
             Assert.That(result.Count, Is.EqualTo(5));
             Assert.That(result.FirstOrDefault().Name, Is.EqualTo("Publisher 6"));
+        }
+
+        [Test, Order(5)]
+        public void GetPublisherById_WithResponse_Test()
+        {
+            var result = publishersService.GetPublisherById(1);
+
+            Assert.That(result.Id, Is.EqualTo(1));
+            Assert.That(result.Name, Is.EqualTo("Publisher 1"));
+        }
+
+        [Test, Order(6)]
+        public void GetPublisherById_WithoutResponse_Test()
+        {
+            var result = publishersService.GetPublisherById(99);
+
+            Assert.That(result, Is.Null);
+        }
+
+        [Test, Order(7)]
+        public void AddPublisher_WithException_Test()
+        {
+            var newPublisher = new PublisherVm()
+            {
+                Name = "123 With Exception"
+            };
+
+            Assert.That(() => publishersService.AddPublisher(newPublisher),
+                Throws.Exception.TypeOf<PublisherNameException>().With.Message.EqualTo("Name starts with number"));
+        }
+
+        [Test, Order(8)]
+        public void AddPublisher_WithoutException_Test()
+        {
+            var newPublisher = new PublisherVm()
+            {
+                Name = "Without Exception"
+            };
+
+            var result = publishersService.AddPublisher(newPublisher);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Does.StartWith("Without"));
         }
 
         [OneTimeTearDown]
