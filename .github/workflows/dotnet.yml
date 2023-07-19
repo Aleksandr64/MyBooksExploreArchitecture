@@ -6,8 +6,8 @@ on:
     branches: [ "develop" ]
   workflow_dispatch:
 
-if: github.event_name == 'push' && github.event.pull_request
-  jobs:
+jobs:
+  if: github.event_name == 'push' && !github.event.pull_request 
   build:
 
     runs-on: ubuntu-latest
