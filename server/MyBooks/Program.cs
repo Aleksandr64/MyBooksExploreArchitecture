@@ -43,3 +43,5 @@ app.MapControllers();
 //AppDbInitilizer.Seed(app);
 
 app.Run();
+
+//Test action result
