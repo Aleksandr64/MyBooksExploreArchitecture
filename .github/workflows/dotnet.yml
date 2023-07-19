@@ -27,4 +27,4 @@ jobs:
       run: dotnet test --no-build --verbosity normal ./server/MyBooksUnitTest
     - if: github.event_name == 'pull_request'
     - run: echo "GitHub Action не запускається для пул реквестів"
-      
+#     у
