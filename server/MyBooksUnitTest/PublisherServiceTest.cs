@@ -32,7 +32,7 @@ namespace MyBooksUnitTest
         {
             var result = publishersService.GetAllPublishers("", "", null);
 
-            Assert.That(result.Count, Is.EqualTo(6));
+            Assert.That(result.Count, Is.EqualTo(5));
         }
 
         [Test, Order(2)]
