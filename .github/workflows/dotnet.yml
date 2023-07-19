@@ -18,12 +18,10 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./server/MyProject.csproj
 
-    # Add the working-directory option here
     - name: Build
-      working-directory: ./server
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore ./server/MyBooks/MyProject.Web.csproj
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
