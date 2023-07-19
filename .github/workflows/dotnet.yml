@@ -2,7 +2,6 @@ name: .NET
 
 on:
   push:
-    branches: [ "featute/action-git-hub" ]
   pull_request:
     branches: [ "develop" ]
 
@@ -12,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - if: github.event_name != 'pull_request'
     - uses: actions/checkout@v3
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
@@ -25,3 +25,6 @@ jobs:
 
     - name: Test
       run: dotnet test --no-build --verbosity normal ./server/MyBooksUnitTest
+    - if: github.event_name == 'pull_request'
+    - run: echo "GitHub Action не запускається для пул реквестів"
+      
