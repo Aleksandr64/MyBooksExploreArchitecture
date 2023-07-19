@@ -18,10 +18,10 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore ./server/MyProject.csproj
+      run: dotnet restore ./server/MyBooks/MyProject.csproj
 
     - name: Build
-      run: dotnet build --no-restore ./server/MyBooks/MyProject.Web.csproj
+      run: dotnet build --no-restore ./server
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
