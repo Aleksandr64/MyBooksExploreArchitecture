@@ -4,7 +4,9 @@ on:
   push:
   pull_request:
     branches: [ "develop" ]
-  workflow_dispatch:
+    types:
+      - opened         
+      - synchronize
 
 jobs:
   build:
